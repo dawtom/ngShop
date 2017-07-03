@@ -1,0 +1,19 @@
+<h1>
+  List of books
+</h1>
+
+<ul>
+  <li *ngFor="let prod of products">
+    Id: {{prod.id}}
+    Author: {{prod.author}}
+    Title: {{prod.title}}
+    <button (click)="deleteProduct(prod.id)">Delete this product</button>
+
+  </li>
+</ul>
+
+<h3>Add book</h3>
+Author: <input type="text" [(ngModel)]=author>
+Title: <input type="text" [(ngModel)]=title>
+<button (click)="addProduct()">Add book</button>
+
