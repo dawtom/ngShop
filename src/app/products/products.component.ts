@@ -3,47 +3,69 @@ import {Http, Response, Headers, RequestOptionsArgs, RequestMethod, RequestOptio
 import { NgModule } from '@angular/core';
 import 'rxjs/add/operator/map';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductsService } from '../products.service';
+import {CategoriesComponent} from '../categories/categories.component'
+import {Observable} from "rxjs";
+import {IProduct} from "./IProduct";
+import {CategoriesService} from "../categories.service";
+
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css']
 })
+
+
 export class ProductsComponent implements OnInit {
 
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private productsService: ProductsService, private categoryService: CategoriesService) {
 
   }
   baseUrl = 'http://localhost:3000';
   products = [];
-  public author = '';
-  public title = '';
+  categories = [];
+  category = '';
+  name = '';
+  price;
 
 
-  toSend: any = {author: this.author, title: this.title};
+
+  toSend: any = {category: this.category, name: this.name, price: this.price};
+
+
+
 
   getAllProducts(){
-    this.http.get
-    (this.baseUrl + '/books').map((resp:Response) => resp.json())
+    this.productsService.getProducts()
       .subscribe(
         (data) => {
           const products = data;
           this.products = products;
           console.log(products);
         },
-        err => {alert("ERROR: GET localhost:3000/books ")}
+        err => {alert("ERROR: GET localhost:3000/products ")}
       );
-
   }
 
   ngOnInit() {
     this.getAllProducts();
+    this.categoryService.getCategories().
+    subscribe(
+      (data) => {
+        const categories = data;
+        this.categories = categories;
+        console.log(categories);
+      },
+      err => {alert("ERROR: GET localhost:3000/categories ")}
+    );
   }
   addProduct(){
-    this.toSend.author = this.author;
-    this.toSend.title = this.title;
-    this.http.post(this.baseUrl + '/books', this.toSend, new Headers())
+    this.toSend.category = this.category;
+    this.toSend.name = this.name;
+    this.toSend.price = this.price;
+    this.productsService.addProduct(this.toSend)
       .subscribe(
         () => {
           location.reload();
@@ -52,10 +74,8 @@ export class ProductsComponent implements OnInit {
       )
   }
 
-  toDelete: any = {id: 0, author: this.author, title: this.title};
-  prodId = 0;
   deleteProduct(prodId: number){
-    this.http.delete(this.baseUrl + '/books/' + prodId).
+    this.productsService.deleteProduct(prodId).
       subscribe(
       () => {
         location.reload();

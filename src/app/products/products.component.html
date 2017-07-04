@@ -1,19 +1,25 @@
 <h1>
-  List of books
+  List of products
 </h1>
 
 <ul>
   <li *ngFor="let prod of products">
     Id: {{prod.id}}
-    Author: {{prod.author}}
-    Title: {{prod.title}}
+    Category: {{prod.category}}
+    Name: {{prod.name}}
+    Price: {{prod.price}}
     <button (click)="deleteProduct(prod.id)">Delete this product</button>
 
   </li>
 </ul>
 
-<h3>Add book</h3>
-Author: <input type="text" [(ngModel)]=author>
-Title: <input type="text" [(ngModel)]=title>
-<button (click)="addProduct()">Add book</button>
-
+<h3>Add product</h3>
+<p>
+  Category:
+  <select [(ngModel)]=category>
+    <option *ngFor="let cat of categories" value={{cat.name}}>{{cat.name}}</option>
+  </select>
+</p>
+<p>Name: <input type="text" [(ngModel)]=name></p>
+<p>Price: <input type="number" [(ngModel)]=price></p>
+<p><button (click)="addProduct()">Add</button></p>

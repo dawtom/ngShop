@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductsService } from '../products.service';
 
 @Component({
   selector: 'app-image-test',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ImageTestComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pSer: ProductsService) {
+
+  }
 
   ngOnInit() {
   }
