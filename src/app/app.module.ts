@@ -13,10 +13,26 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductsService } from './products.service';
 import { CategoriesService} from './categories.service'
 import { CategoriesComponent } from './categories/categories.component';
+import { CustomerComponent } from './customer/customer.component';
+import { ManagerComponent } from './manager/manager.component';
+import { NavigatorComponent } from './navigator/navigator.component';
 
-const appRoutes = [
-  {path: 'products', component: ProductsComponent},
-  {path: 'categories', component: CategoriesComponent}
+const appRoutes: Routes = [
+  {path: 'manager', component: ManagerComponent,
+    children: [
+      {path: 'products', component: ProductsComponent},
+      {path: 'categories', component: CategoriesComponent}
+    ]
+  },
+  {path: 'customer', component: CustomerComponent},
+  {path: 'navigator', component: NavigatorComponent}
+  /*{path: 'products', component: ProductsComponent},
+  {path: 'categories', component: CategoriesComponent},
+  {path: 'categories', component: CategoriesComponent,
+    children: [
+      {path: 'withImage', component: ImageTestComponent}
+    ]
+  }*/
 ];
 
 @NgModule({
@@ -25,7 +41,10 @@ const appRoutes = [
     UsersComponent,
     ProductsComponent,
     ImageTestComponent,
-    CategoriesComponent
+    CategoriesComponent,
+    CustomerComponent,
+    ManagerComponent,
+    NavigatorComponent
   ],
   imports: [
     BrowserModule,

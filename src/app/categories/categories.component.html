@@ -1,0 +1,13 @@
+<h1>Categories</h1>
+
+
+<ul>
+  <li *ngFor="let cat of categories">
+    Id: {{cat.id}}<br>
+    Category: {{cat.category}}<br>
+    Name: {{cat.name}}<br>
+    Price: {{cat.price}}<br>
+    <button (click)="deleteProduct(prod.id)">Delete this category</button>
+
+  </li>
+</ul>

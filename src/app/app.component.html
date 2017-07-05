@@ -1,10 +1,18 @@
 <div>
     <h1>
       This is my mock online Angular4 shop.
+      <button routerLink="/navigator" routerLinkActive="active">Enter the shop</button>
     </h1>
 </div>
 
-<div>
-  <app-products></app-products>
-</div>
+<router-outlet></router-outlet>
+
+<!--<div>
+  <nav>
+    button><a [routerLink]="['/products']" routerLinkActive="active">Show me products panel.</a></button><
+    <button><a routerLink="/categories" routerLinkActive="active">Show me categories panel.</a></button>
+    <button><a routerLink="/" routerLinkActive="active">Back</a></button>
+  </nav>
+  <router-outlet></router-outlet>
+</div>-->
 
