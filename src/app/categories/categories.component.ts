@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Http, Response} from "@angular/http";
+import {Http} from "@angular/http";
 import {CategoriesService} from "../categories.service";
 
 @Component({
@@ -11,8 +11,6 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private http: Http, private categoriesService: CategoriesService) { }
 
-
-  baseUrl = 'http://localhost:3000';
   categories = [];
   name = '';
   toSend: any = {name: this.name};
@@ -25,7 +23,7 @@ export class CategoriesComponent implements OnInit {
           this.categories = categories;
           console.log(categories);
         },
-        err => {alert("ERROR: GET localhost:3000/categories ")}
+        err => {alert(err + "ERROR: GET localhost:3000/categories ")}
       );
 
   }

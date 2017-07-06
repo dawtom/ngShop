@@ -1,3 +1,9 @@
+<div>
+  <h1>
+    List of products
+  </h1>
+</div>
+
 <div *ngIf="router.url === '/manager/products'">
   <h3>Add product</h3>
   <p>
@@ -11,16 +17,10 @@
   <p><button (click)="addProduct()">Add</button></p>
 </div>
 
-
-<div>
-  <h1>
-    List of products
-  </h1>
-</div>
-
 <div>
   <ul>
     <li *ngFor="let prod of products">
+      Id: {{prod.id}}
       Category: {{prod.category}}
       Name: {{prod.name}}
       Price: {{prod.price}}

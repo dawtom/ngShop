@@ -1,15 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Http, Response, Headers, RequestOptionsArgs, RequestMethod, RequestOptions} from "@angular/http";
-import { NgModule } from '@angular/core';
+import {Http} from "@angular/http";
 import 'rxjs/add/operator/map';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProductsService } from '../products.service';
-import {CategoriesComponent} from '../categories/categories.component'
-import {Observable} from "rxjs";
-import {IProduct} from "./IProduct";
 import {CategoriesService} from "../categories.service";
 import {Router} from "@angular/router";
-import {BagComponent} from "../bag/bag.component";
 import {BagService} from "../bag.service";
 
 
@@ -30,7 +24,6 @@ export class ProductsComponent implements OnInit {
   {
 
   }
-  baseUrl = 'http://localhost:3000';
   products = [];
   categories = [];
   category = '';
@@ -53,7 +46,7 @@ export class ProductsComponent implements OnInit {
         this.categories = categories;
         console.log(categories);
       },
-      err => {alert("ERROR: GET localhost:3000/categories ")}
+      err => {alert(err + "ERROR: GET localhost:3000/categories ")}
     );
   }
 
@@ -67,7 +60,7 @@ export class ProductsComponent implements OnInit {
           this.products = products;
           console.log(products);
         },
-        err => {alert("ERROR: GET localhost:3000/products ")}
+        err => {alert(err + "ERROR: GET localhost:3000/products ")}
       );
   }
 
