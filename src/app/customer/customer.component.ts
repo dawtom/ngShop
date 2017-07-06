@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {BagService} from "../bag.service";
 
 @Component({
   selector: 'app-customer',
@@ -7,7 +8,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerComponent implements OnInit {
 
-  constructor() { }
+  constructor(private bagService: BagService) { }
+
 
   ngOnInit() {
   }

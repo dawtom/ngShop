@@ -1,1 +1,10 @@
-<button routerLink="/navigator" routerLinkActive="active">Back to main menu</button>
+<nav>
+  <button routerLink="/navigator" routerLinkActive="active">Back to main menu</button>
+</nav>
+
+<nav>
+  <button routerLink="products" routerLinkActive="active">Manage products</button>
+  <button routerLink="bag" routerLinkActive="active">Go to bag ({{this.bagService.bagIds.length}} products)</button>
+</nav>
+
+<router-outlet></router-outlet>

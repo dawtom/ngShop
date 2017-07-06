@@ -16,6 +16,8 @@ import { CategoriesComponent } from './categories/categories.component';
 import { CustomerComponent } from './customer/customer.component';
 import { ManagerComponent } from './manager/manager.component';
 import { NavigatorComponent } from './navigator/navigator.component';
+import { BagComponent } from './bag/bag.component';
+import {BagService} from "./bag.service";
 
 const appRoutes: Routes = [
   {path: 'manager', component: ManagerComponent,
@@ -24,15 +26,13 @@ const appRoutes: Routes = [
       {path: 'categories', component: CategoriesComponent}
     ]
   },
-  {path: 'customer', component: CustomerComponent},
-  {path: 'navigator', component: NavigatorComponent}
-  /*{path: 'products', component: ProductsComponent},
-  {path: 'categories', component: CategoriesComponent},
-  {path: 'categories', component: CategoriesComponent,
+  {path: 'customer', component: CustomerComponent,
     children: [
-      {path: 'withImage', component: ImageTestComponent}
+      {path: 'products', component: ProductsComponent},
+      {path: 'bag', component: BagComponent}
     ]
-  }*/
+  },
+  {path: 'navigator', component: NavigatorComponent}
 ];
 
 @NgModule({
@@ -44,7 +44,8 @@ const appRoutes: Routes = [
     CategoriesComponent,
     CustomerComponent,
     ManagerComponent,
-    NavigatorComponent
+    NavigatorComponent,
+    BagComponent
   ],
   imports: [
     BrowserModule,
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
   ],
   providers: [
     ProductsService,
-    CategoriesService
+    CategoriesService,
+    BagService
   ],
   bootstrap: [AppComponent]
 })

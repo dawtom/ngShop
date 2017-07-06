@@ -8,6 +8,9 @@ import {CategoriesComponent} from '../categories/categories.component'
 import {Observable} from "rxjs";
 import {IProduct} from "./IProduct";
 import {CategoriesService} from "../categories.service";
+import {Router} from "@angular/router";
+import {BagComponent} from "../bag/bag.component";
+import {BagService} from "../bag.service";
 
 
 @Component({
@@ -20,7 +23,11 @@ import {CategoriesService} from "../categories.service";
 export class ProductsComponent implements OnInit {
 
 
-  constructor(private http: Http, private productsService: ProductsService, private categoryService: CategoriesService) {
+  constructor(private http: Http, private router: Router,
+              private productsService: ProductsService,
+              private categoryService: CategoriesService,
+              private bagService: BagService)
+  {
 
   }
   baseUrl = 'http://localhost:3000';
@@ -31,9 +38,24 @@ export class ProductsComponent implements OnInit {
   price;
 
 
+  addToBag(prodId){
+    this.bagService.addToBag(prodId);
+  }
 
   toSend: any = {category: this.category, name: this.name, price: this.price};
 
+  ngOnInit() {
+    this.getAllProducts();
+    this.categoryService.getCategories().
+    subscribe(
+      (data) => {
+        const categories = data;
+        this.categories = categories;
+        console.log(categories);
+      },
+      err => {alert("ERROR: GET localhost:3000/categories ")}
+    );
+  }
 
 
 
@@ -49,18 +71,7 @@ export class ProductsComponent implements OnInit {
       );
   }
 
-  ngOnInit() {
-    this.getAllProducts();
-    this.categoryService.getCategories().
-    subscribe(
-      (data) => {
-        const categories = data;
-        this.categories = categories;
-        console.log(categories);
-      },
-      err => {alert("ERROR: GET localhost:3000/categories ")}
-    );
-  }
+
   addProduct(){
     this.toSend.category = this.category;
     this.toSend.name = this.name;
@@ -68,7 +79,7 @@ export class ProductsComponent implements OnInit {
     this.productsService.addProduct(this.toSend)
       .subscribe(
         () => {
-          location.reload();
+          this.getAllProducts();
         },
         err => alert(err)
       )
@@ -78,7 +89,7 @@ export class ProductsComponent implements OnInit {
     this.productsService.deleteProduct(prodId).
       subscribe(
       () => {
-        location.reload();
+        this.getAllProducts();
       },
       err => alert(err)
     )

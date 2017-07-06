@@ -16,6 +16,11 @@ export class ProductsService {
       .map((response: Response) => <IProduct[]> response.json())
   }
 
+  getSingleProduct(prodId): Observable<IProduct> {
+    return this.http.get(this.baseUrl + '/products/' + prodId)
+      .map((response: Response) => <IProduct> response.json())
+  }
+
   addProduct(toSend): Observable<Response>{
     return this.http.post(this.baseUrl + '/products', toSend, new Headers());
   }

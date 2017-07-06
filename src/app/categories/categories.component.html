@@ -1,13 +1,16 @@
 <h1>Categories</h1>
 
+<p>
+  Add category: <input type="text" [(ngModel)]=name>
+  <button (click)="addCategory()">Add</button>
+</p>
 
 <ul>
   <li *ngFor="let cat of categories">
     Id: {{cat.id}}<br>
-    Category: {{cat.category}}<br>
     Name: {{cat.name}}<br>
-    Price: {{cat.price}}<br>
-    <button (click)="deleteProduct(prod.id)">Delete this category</button>
+    <button (click)="deleteCategory(cat.id)">Delete this category</button>
 
   </li>
 </ul>
+

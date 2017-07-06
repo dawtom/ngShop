@@ -1,25 +1,34 @@
-<h1>
-  List of products
-</h1>
+<div *ngIf="router.url === '/manager/products'">
+  <h3>Add product</h3>
+  <p>
+    Category:
+    <select [(ngModel)]=category>
+      <option *ngFor="let cat of categories" value={{cat.name}}>{{cat.name}}</option>
+    </select>
+  </p>
+  <p>Name: <input type="text" [(ngModel)]=name></p>
+  <p>Price: <input type="number" [(ngModel)]=price></p>
+  <p><button (click)="addProduct()">Add</button></p>
+</div>
 
-<ul>
-  <li *ngFor="let prod of products">
-    Id: {{prod.id}}
-    Category: {{prod.category}}
-    Name: {{prod.name}}
-    Price: {{prod.price}}
-    <button (click)="deleteProduct(prod.id)">Delete this product</button>
 
-  </li>
-</ul>
+<div>
+  <h1>
+    List of products
+  </h1>
+</div>
 
-<h3>Add product</h3>
-<p>
-  Category:
-  <select [(ngModel)]=category>
-    <option *ngFor="let cat of categories" value={{cat.name}}>{{cat.name}}</option>
-  </select>
-</p>
-<p>Name: <input type="text" [(ngModel)]=name></p>
-<p>Price: <input type="number" [(ngModel)]=price></p>
-<p><button (click)="addProduct()">Add</button></p>
+<div>
+  <ul>
+    <li *ngFor="let prod of products">
+      Category: {{prod.category}}
+      Name: {{prod.name}}
+      Price: {{prod.price}}
+      <button *ngIf="router.url === '/manager/products'" (click)="deleteProduct(prod.id)">Delete this product</button>
+      <button *ngIf="router.url === '/customer/products'" (click)="addToBag(prod.id)">Add product to bag</button>
+
+    </li>
+  </ul>
+</div>
+
+

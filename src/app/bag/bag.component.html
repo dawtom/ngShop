@@ -1,0 +1,16 @@
+<div>
+  <h2>
+    Your bag <span *ngIf="this.productsFromBag.length === 0">is empty</span>
+  </h2>
+  <ul>
+    <li *ngFor="let prod of productsFromBag">
+      Category: {{prod.category}}
+      Name: {{prod.name}}
+      Price: {{prod.price}}
+    </li>
+  </ul>
+</div>
+
+<div *ngIf="this.productsFromBag.length != 0">
+  <button (click)="buy()" routerLink="/customer" routerLinkActive="active">Buy</button>
+</div>
